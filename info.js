@@ -7,9 +7,9 @@ export const info = {
     recipients: ['ventas@dormimania.com'],
     subject: 'Nuevo prospecto Dormimania',
   },
-  phoneNumber: '+',
+  phoneNumber: '+5213333025565',
   whatsapp: {
-    value: '+',
+    value: '+5213333025565',
     message: 'Buen día, me interesa un colchón que vi en su web',
   },
   social: {

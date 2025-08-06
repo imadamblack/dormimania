@@ -1,6 +1,6 @@
 import { useFormContext } from 'react-hook-form';
 
-export const Select = ({name, inputOptions, options, placeholder, className = ''}) => {
+export const Select = ({name, inputOptions, options, placeholder, className = '', onChange }) => {
   const {register} = useFormContext();
 
   return (
@@ -8,6 +8,7 @@ export const Select = ({name, inputOptions, options, placeholder, className = ''
       <select
         {...register(name, inputOptions)}
         className={className + 'rounded-lg'}
+        onChange={onChange}
       >
         <option value="" disabled selected>{placeholder}</option>
         {/* eslint-disable-next-line react/jsx-key */}

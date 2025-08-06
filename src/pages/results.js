@@ -14,29 +14,32 @@ import pic06 from '../../public/profile-pics/06.jpg';
 import pic07 from '../../public/profile-pics/07.jpeg';
 import pic08 from '../../public/profile-pics/08.jpeg';
 import pic09 from '../../public/profile-pics/09.jpeg';
+import { info } from '../../info';
+import { useState } from 'react';
 
 const colchones = [
   {
     name: 'Fresh Gel',
     photos: ['fresh-01.png', 'fresh-02.png', 'fresh-03.png'],
     link: 'https://dormimania.com/collections/lo-mas-vendido/products/fresh-gel',
-    description: 'Múltiples capas de espumas de última generación, para proporcionar un balance entre suavidad y firmeza.'
+    description: 'Múltiples capas de espumas de última generación, para proporcionar un balance entre suavidad y firmeza.',
   },
   {
     name: 'Zen',
     photos: ['hibrido-01.webp', 'hibrido-02.webp', 'hibrido-03.webp'],
     link: 'https://dormimania.com/collections/lo-mas-vendido/products/colchon-thera-sleep-zen',
-    description: 'Híbrido de resortes independientes, memory gel foam, fibras antimicrobianas.'
+    description: 'Híbrido de resortes independientes, memory gel foam, fibras antimicrobianas.',
   },
   {
-    name: 'Imperial',
+    name: 'Luxury Reserve',
     photos: ['imperial-01.jpg', 'imperial-02.jpg', 'imperial-03.jpg'],
     link: '',
-    description: 'El más chido de todos, con la más alta tecnología, hasta el dueño de Dormimanía duerme en uno de estos.'
+    description: 'El más chido de todos, con la más alta tecnología, hasta el dueño de Dormimanía duerme en uno de estos.',
   },
 ];
 
 export default function Results({lead}) {
+  const [tienda, setTienda] = useState('');
   const methods = useForm({mode: 'all'});
   const {
     register,
@@ -274,31 +277,35 @@ export default function Results({lead}) {
       <div id="storeLocator" className="container py-40 border-t">
         <h2 className="mb-12">Encuentra una tienda física</h2>
         <FormProvider {...methods}>
-          <form className="flex flex-col flex-grow space-y-8" onSubmit={handleSubmit(() => {})}>
+          <div
+            className="flex flex-col flex-grow space-y-8"
+          >
             <Select
-              name="tiendas"
-              inputOptions={{}}
+              name="tienda"
+              onChange={(e) => setTienda(e.target.value)}
               options={[
                 {value: '', label: '--- Guadalajara ---', disabled: true},
-                {value: 'valle-real', label: 'Valle Real'},
-                {value: 'mariano-otero', label: 'Mariano Otero'},
-                {value: 'arboledas', label: 'Arboledas'},
-                {value: 'canadas', label: 'Cañadas'},
-                {value: 'lopez-mateos', label: 'López Mateos'},
-                {value: 'estadio', label: 'Estadio'},
-                {value: 'revolucion', label: 'Av. Revolución'},
+                {value: 'Valle Real', label: 'Valle Real'},
+                {value: 'Mariano Otero', label: 'Mariano Otero'},
+                {value: 'Arboledas', label: 'Arboledas'},
+                {value: 'Cañadas', label: 'Cañadas'},
+                {value: 'Lopez Mateos', label: 'López Mateos'},
+                {value: 'Estadio', label: 'Estadio'},
+                {value: 'Revolucion', label: 'Av. Revolución'},
                 {value: '', label: '--- Tepatitlán ---', disabled: true},
-                {value: 'plaza-arboledas', label: 'Plaza Arboledas'},
+                {value: 'Tepa Arboledas', label: 'Plaza Arboledas'},
                 {value: '', label: '--- Colima ---', disabled: true},
-                {value: 'colima', label: 'Colima'},
-                {value: 'las-lomas', label: 'Jardines de las Lomas'},
+                {value: 'Colima', label: 'Colima'},
+                {value: 'Las Lomas', label: 'Jardines de las Lomas'},
                 {value: '', label: '--- Manzanillo ---', disabled: true},
-                {value: 'manzanillo', label: 'Manzanillo'},
+                {value: 'Manzanillo', label: 'Manzanillo'},
               ]}
               placeholder="Selecciona una tienda"
             />
-            <button className="w-full">Contactar</button>
-          </form>
+            <a target="_blank"
+               href={`https://wa.me/${info.whatsapp.value}?text=Hola! Me interesa ver un colchón en su tienda ${tienda}`}
+               className="button !w-full">Contactar</a>
+          </div>
         </FormProvider>
       </div>
 
@@ -318,7 +325,7 @@ export async function getServerSideProps(ctx) {
     return {
       redirect: {
         permanent: false,
-        destination: '/survey',
+        destination: '/',
       },
     };
   }
